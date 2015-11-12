@@ -2,161 +2,78 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+var rows = 4;
+var cols = 4;
+
+var TableCell = React.createClass({
+	displayName: 'TableCell',
+
+	render: function () {
+		return React.createElement('td', {
+			__source: {
+				fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+				lineNumber: 10
+			}
+		});
+	}
+});
+
+var TableRow = React.createClass({
+	displayName: 'TableRow',
+
+	render: function () {
+		cells = [];
+		for (var i = 0; i < this.props.colcount; i++) {
+			cells.push(React.createElement(TableCell, {
+				__source: {
+					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+					lineNumber: 19
+				}
+			}));
+		}
+		return React.createElement(
+			'tr',
+			{
+				__source: {
+					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+					lineNumber: 22
+				}
+			},
+			cells
+		);
+	}
+});
+
 var Table = React.createClass({
 	displayName: 'Table',
 
 	render: function () {
+		var rows = [];
+		for (var i = 0; i < this.props.rowcount; i++) {
+			rows.push(React.createElement(TableRow, { colcount: this.props.colcount, __source: {
+					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+					lineNumber: 31
+				}
+			}));
+		}
 		return React.createElement(
 			'table',
 			{
 				__source: {
 					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-					lineNumber: 7
+					lineNumber: 34
 				}
 			},
-			React.createElement(
-				'tr',
-				{
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 8
-					}
-				},
-				React.createElement('td', {
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 9
-					}
-				}),
-				React.createElement('td', {
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 10
-					}
-				}),
-				React.createElement('td', {
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 11
-					}
-				}),
-				React.createElement('td', {
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 12
-					}
-				})
-			),
-			React.createElement(
-				'tr',
-				{
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 14
-					}
-				},
-				React.createElement('td', {
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 15
-					}
-				}),
-				React.createElement('td', {
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 16
-					}
-				}),
-				React.createElement('td', {
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 17
-					}
-				}),
-				React.createElement('td', {
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 18
-					}
-				})
-			),
-			React.createElement(
-				'tr',
-				{
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 20
-					}
-				},
-				React.createElement('td', {
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 21
-					}
-				}),
-				React.createElement('td', {
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 22
-					}
-				}),
-				React.createElement('td', {
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 23
-					}
-				}),
-				React.createElement('td', {
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 24
-					}
-				})
-			),
-			React.createElement(
-				'tr',
-				{
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 26
-					}
-				},
-				React.createElement('td', {
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 27
-					}
-				}),
-				React.createElement('td', {
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 28
-					}
-				}),
-				React.createElement('td', {
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 29
-					}
-				}),
-				React.createElement('td', {
-					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 30
-					}
-				})
-			)
+			rows
 		);
 	}
-
 });
 
-ReactDOM.render(React.createElement(Table, {
-	__source: {
+ReactDOM.render(React.createElement(Table, { rowcount: rows, colcount: cols, __source: {
 		fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-		lineNumber: 39
+		lineNumber: 43
 	}
-}), document.getElementById('container'));
+}), document.getElementById('table'));
 
 },{"react":158,"react-dom":29}],2:[function(require,module,exports){
 (function (process){
