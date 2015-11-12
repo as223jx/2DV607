@@ -21,5 +21,8 @@
     "babelify": "^7.2.0",
     "react": "^0.14.2",
     "react-dom": "^0.14.2"
+  },
+  "scripts": {
+	"build": "browserify -t [ babelify --presets [ react ] ] main.js -o bundle.js"
   }
 }
