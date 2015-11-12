@@ -95,16 +95,161 @@ process.umask = function() { return 0; };
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-ReactDOM.render(React.createElement(
-	'h1',
-	{
-		__source: {
-			fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-			lineNumber: 5
-		}
-	},
-	'Hello, world!'
-), document.getElementById('container'));
+var Table = React.createClass({
+	displayName: 'Table',
+
+	render: function () {
+		return React.createElement(
+			'table',
+			{
+				__source: {
+					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+					lineNumber: 7
+				}
+			},
+			React.createElement(
+				'tr',
+				{
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 8
+					}
+				},
+				React.createElement('td', {
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 9
+					}
+				}),
+				React.createElement('td', {
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 10
+					}
+				}),
+				React.createElement('td', {
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 11
+					}
+				}),
+				React.createElement('td', {
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 12
+					}
+				})
+			),
+			React.createElement(
+				'tr',
+				{
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 14
+					}
+				},
+				React.createElement('td', {
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 15
+					}
+				}),
+				React.createElement('td', {
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 16
+					}
+				}),
+				React.createElement('td', {
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 17
+					}
+				}),
+				React.createElement('td', {
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 18
+					}
+				})
+			),
+			React.createElement(
+				'tr',
+				{
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 20
+					}
+				},
+				React.createElement('td', {
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 21
+					}
+				}),
+				React.createElement('td', {
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 22
+					}
+				}),
+				React.createElement('td', {
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 23
+					}
+				}),
+				React.createElement('td', {
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 24
+					}
+				})
+			),
+			React.createElement(
+				'tr',
+				{
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 26
+					}
+				},
+				React.createElement('td', {
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 27
+					}
+				}),
+				React.createElement('td', {
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 28
+					}
+				}),
+				React.createElement('td', {
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 29
+					}
+				}),
+				React.createElement('td', {
+					__source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+						lineNumber: 30
+					}
+				})
+			)
+		);
+	}
+
+});
+
+ReactDOM.render(React.createElement(Table, {
+	__source: {
+		fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
+		lineNumber: 39
+	}
+}), document.getElementById('container'));
 
 },{"react":159,"react-dom":30}],3:[function(require,module,exports){
 (function (process){

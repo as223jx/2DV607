@@ -1,7 +1,41 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+var Table = React.createClass({
+	render: function() {
+		return (
+			<table>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			</table>
+		);
+	}
+	
+});
+
 ReactDOM.render(
-	<h1>Hello, world!</h1>,
+	<Table />,
 	document.getElementById('container')
 );
