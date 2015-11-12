@@ -1,0 +1,25 @@
+{
+  "name": "as223jx-project",
+  "version": "1.0.0",
+  "description": "My RIA project",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/as223jx/2DV607.git"
+  },
+  "author": "Alexandra Seppänen <as223jx@student.lnu.se>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/as223jx/2DV607/issues"
+  },
+  "homepage": "https://github.com/as223jx/2DV607#readme",
+  "dependencies": {
+    "babel-preset-react": "^6.1.4",
+    "babelify": "^7.2.0",
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2"
+  }
+}
