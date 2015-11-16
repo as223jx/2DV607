@@ -6,8 +6,9 @@ var cols = 4;
 
 var TableCell = React.createClass({
 	render: function() {
+		var classname = "blocks";
 		return (
-			<td></td>
+			<td className ={classname}></td>
 		)
 	}
 });
@@ -32,7 +33,9 @@ var Table = React.createClass({
 		}
 		return (
 			<table>
+			<tbody>
 			{rows}
+			</tbody>
 			</table>
 		);
 	}
