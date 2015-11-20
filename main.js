@@ -6,10 +6,13 @@ var cols = 4;
 var count = 0;
 
 var TableCell = React.createClass({
+	handleClick: function(event) {
+		alert("Click!");
+	},
 	render: function() {
 		var classname = "blocks";
 		return (
-			<td className={classname} id={this.props.id}></td>
+			<td onClick={this.handleClick} className={classname} id={this.props.id}></td>
 		)
 	}
 });

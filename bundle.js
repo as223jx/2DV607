@@ -102,11 +102,14 @@ var count = 0;
 var TableCell = React.createClass({
 	displayName: 'TableCell',
 
+	handleClick: function (event) {
+		alert("Click!");
+	},
 	render: function () {
 		var classname = "blocks";
-		return React.createElement('td', { className: classname, id: this.props.id, __source: {
+		return React.createElement('td', { onClick: this.handleClick, className: classname, id: this.props.id, __source: {
 				fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-				lineNumber: 12
+				lineNumber: 15
 			}
 		});
 	}
@@ -120,7 +123,7 @@ var TableRow = React.createClass({
 		for (var i = 0; i < this.props.colcount; i++) {
 			cells.push(React.createElement(TableCell, { id: count++, __source: {
 					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-					lineNumber: 21
+					lineNumber: 24
 				}
 			}));
 		}
@@ -129,7 +132,7 @@ var TableRow = React.createClass({
 			{
 				__source: {
 					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-					lineNumber: 24
+					lineNumber: 27
 				}
 			},
 			cells
@@ -146,7 +149,7 @@ var Table = React.createClass({
 		for (var i = 0; i < this.props.rowcount; i++) {
 			rows.push(React.createElement(TableRow, { colcount: this.props.colcount, id: count, __source: {
 					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-					lineNumber: 34
+					lineNumber: 37
 				}
 			}));
 		}
@@ -155,7 +158,7 @@ var Table = React.createClass({
 			{
 				__source: {
 					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-					lineNumber: 37
+					lineNumber: 40
 				}
 			},
 			React.createElement(
@@ -163,7 +166,7 @@ var Table = React.createClass({
 				{
 					__source: {
 						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 38
+						lineNumber: 41
 					}
 				},
 				rows
@@ -174,7 +177,7 @@ var Table = React.createClass({
 
 ReactDOM.render(React.createElement(Table, { rowcount: rows, colcount: cols, __source: {
 		fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-		lineNumber: 48
+		lineNumber: 51
 	}
 }), document.getElementById('table'));
 
