@@ -97,15 +97,16 @@ var ReactDOM = require('react-dom');
 
 var rows = 4;
 var cols = 4;
+var count = 0;
 
 var TableCell = React.createClass({
 	displayName: 'TableCell',
 
 	render: function () {
 		var classname = "blocks";
-		return React.createElement('td', { className: classname, __source: {
+		return React.createElement('td', { className: classname, id: this.props.id, __source: {
 				fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-				lineNumber: 11
+				lineNumber: 12
 			}
 		});
 	}
@@ -117,10 +118,9 @@ var TableRow = React.createClass({
 	render: function () {
 		cells = [];
 		for (var i = 0; i < this.props.colcount; i++) {
-			cells.push(React.createElement(TableCell, {
-				__source: {
+			cells.push(React.createElement(TableCell, { id: count++, __source: {
 					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-					lineNumber: 20
+					lineNumber: 21
 				}
 			}));
 		}
@@ -129,7 +129,7 @@ var TableRow = React.createClass({
 			{
 				__source: {
 					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-					lineNumber: 23
+					lineNumber: 24
 				}
 			},
 			cells
@@ -142,10 +142,11 @@ var Table = React.createClass({
 
 	render: function () {
 		var rows = [];
+		count = 0;
 		for (var i = 0; i < this.props.rowcount; i++) {
-			rows.push(React.createElement(TableRow, { colcount: this.props.colcount, __source: {
+			rows.push(React.createElement(TableRow, { colcount: this.props.colcount, id: count, __source: {
 					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-					lineNumber: 32
+					lineNumber: 34
 				}
 			}));
 		}
@@ -154,7 +155,7 @@ var Table = React.createClass({
 			{
 				__source: {
 					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-					lineNumber: 35
+					lineNumber: 37
 				}
 			},
 			React.createElement(
@@ -162,7 +163,7 @@ var Table = React.createClass({
 				{
 					__source: {
 						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 36
+						lineNumber: 38
 					}
 				},
 				rows
@@ -173,7 +174,7 @@ var Table = React.createClass({
 
 ReactDOM.render(React.createElement(Table, { rowcount: rows, colcount: cols, __source: {
 		fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-		lineNumber: 46
+		lineNumber: 48
 	}
 }), document.getElementById('table'));
 
