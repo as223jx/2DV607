@@ -103,7 +103,7 @@ var TableCell = React.createClass({
 	displayName: 'TableCell',
 
 	handleClick: function (event) {
-		alert("Click!");
+		alert("Clicked cell no. " + this.props.id);
 	},
 	render: function () {
 		var classname = "blocks";
@@ -120,10 +120,11 @@ var TableRow = React.createClass({
 
 	render: function () {
 		cells = [];
+		this.timer;
 		for (var i = 0; i < this.props.colcount; i++) {
 			cells.push(React.createElement(TableCell, { id: count++, __source: {
 					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-					lineNumber: 24
+					lineNumber: 25
 				}
 			}));
 		}
@@ -132,7 +133,7 @@ var TableRow = React.createClass({
 			{
 				__source: {
 					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-					lineNumber: 27
+					lineNumber: 28
 				}
 			},
 			cells
@@ -149,7 +150,7 @@ var Table = React.createClass({
 		for (var i = 0; i < this.props.rowcount; i++) {
 			rows.push(React.createElement(TableRow, { colcount: this.props.colcount, id: count, __source: {
 					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-					lineNumber: 37
+					lineNumber: 38
 				}
 			}));
 		}
@@ -158,7 +159,7 @@ var Table = React.createClass({
 			{
 				__source: {
 					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-					lineNumber: 40
+					lineNumber: 41
 				}
 			},
 			React.createElement(
@@ -166,7 +167,7 @@ var Table = React.createClass({
 				{
 					__source: {
 						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-						lineNumber: 41
+						lineNumber: 42
 					}
 				},
 				rows
@@ -177,7 +178,7 @@ var Table = React.createClass({
 
 ReactDOM.render(React.createElement(Table, { rowcount: rows, colcount: cols, __source: {
 		fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\main.js',
-		lineNumber: 51
+		lineNumber: 52
 	}
 }), document.getElementById('table'));
 

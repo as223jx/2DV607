@@ -7,7 +7,7 @@ var count = 0;
 
 var TableCell = React.createClass({
 	handleClick: function(event) {
-		alert("Click!");
+		alert("Clicked cell no. " + this.props.id);
 	},
 	render: function() {
 		var classname = "blocks";
@@ -20,6 +20,7 @@ var TableCell = React.createClass({
 var TableRow = React.createClass({
 	render: function() {
 		cells = [];
+		this.timer;
 		for(var i = 0; i < this.props.colcount; i++) {
 			cells.push(<TableCell id={count++} />);
 		}
