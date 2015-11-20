@@ -1,3 +1,7 @@
+.clicked {
+	background-color: black;
+}
+
 .blocks {
 	background-color: green;
 }

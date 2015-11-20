@@ -5,20 +5,39 @@ var rows = 4;
 var cols = 4;
 var count = 0;
 
-var TableCell = React.createClass({
-	handleClick: function(event) {
-		alert("Clicked cell no. " + this.props.id);
-	},
-	render: function() {
-		var classname = "blocks";
-		return (
-			<td onClick={this.handleClick} className={classname} id={this.props.id}></td>
-		)
-	}
-});
-
 var TableRow = React.createClass({
 	render: function() {
+		var TableCell = React.createClass({
+			getInitialState: function() {
+				return {
+					isSelected: false
+				};
+			},
+			handleClick: function(event) {
+				if(this.state.isSelected) {
+					this.setState({
+						isSelected: false
+					})
+				}
+				else {
+					this.setState({
+						isSelected: true
+					})
+				}
+			},
+			render: function() {
+				var classname = "blocks";
+				var isSelected = this.state.isSelected;
+				if(isSelected) {
+					classname = "clicked";
+				}
+				
+				return (
+					<td onClick={this.handleClick} className={classname} id={this.props.id}></td>
+				)
+			}
+		});
+
 		cells = [];
 		this.timer;
 		for(var i = 0; i < this.props.colcount; i++) {
