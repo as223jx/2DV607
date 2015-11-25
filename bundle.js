@@ -132,32 +132,24 @@ var React = require('react'),
 var TableCell = React.createClass({
 	displayName: 'TableCell',
 
-	propTypes: {
-		black: proptypes.func.isRequired,
-		green: proptypes.func.isRequired
+	getInitialState: function () {
+		return { currentValue: this.props.currentValue };
 	},
 
 	handleClick: function (event) {
-		if (this.props.currentValue == "black") {
-			this.props.green;
+		console.log(this.state);
+		if (this.state.currentValue == "black") {
+			this.setState({ currentValue: "green" });
 		} else {
-			this.props.black;
+			this.setState({ currentValue: "black" });
 		}
 	},
 	render: function () {
-		if (this.props.currentValue == "black") {
-			return React.createElement('td', { onClick: this.props.green, className: this.props.currentValue, __source: {
-					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table-cell.js',
-					lineNumber: 24
-				}
-			});
-		} else {
-			return React.createElement('td', { onClick: this.props.black, className: this.props.currentValue, __source: {
-					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table-cell.js',
-					lineNumber: 29
-				}
-			});
-		};
+		return React.createElement('td', { onClick: this.handleClick, className: this.state.currentValue, __source: {
+				fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table-cell.js',
+				lineNumber: 23
+			}
+		});
 	}
 });
 
