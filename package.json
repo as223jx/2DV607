@@ -1,29 +1,13 @@
 {
-  "name": "as223jx-project",
+  "name": "testredux",
   "version": "1.0.0",
-  "description": "My RIA project",
-  "main": "main.js",
+  "private": true,
+  "description": "Test",
+  "main": "app.js",
   "scripts": {
-    "build": "browserify -t [ babelify --presets [ react ] ] main.js -o bundle.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"build": "browserify -t [ babelify --presets [ react ] ] src/app.js -o bundle.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/as223jx/2DV607.git"
-  },
-  "author": "Alexandra Seppänen <as223jx@student.lnu.se>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/as223jx/2DV607/issues"
-  },
-  "homepage": "https://github.com/as223jx/2DV607#readme",
-  "dependencies": {
-    "babel-preset-react": "^6.1.4",
-    "babelify": "^7.2.0",
-    "react": "^0.14.2",
-    "react-dom": "^0.14.2",
-    "redux": "^3.0.4"
-  },
-  "devDependencies": {
-    "redux-devtools": "^2.1.5"
-  }
+  "author": "",
+  "license": "ISC"
 }
