@@ -130,49 +130,54 @@ var React = require('react'),
     actions = require('../actions');
 
 var TableCell = React.createClass({
-	displayName: 'TableCell',
+				displayName: 'TableCell',
 
-	getInitialState: function () {
-		return { currentValue: this.props.currentValue };
-	},
+				propTypes: {
+								green: proptypes.func.isRequired,
+								black: proptypes.func.isRequired
+				},
 
-	handleClick: function (event) {
-		console.log(this.state);
-		if (this.state.currentValue == "black") {
-			this.setState({ currentValue: "green" });
-		} else {
-			this.setState({ currentValue: "black" });
-		}
-	},
-	render: function () {
-		return React.createElement('td', { onClick: this.handleClick, className: this.state.currentValue, __source: {
-				fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table-cell.js',
-				lineNumber: 23
-			}
-		});
-	}
+				getInitialState: function () {
+								return { currentValue: this.props.currentValue };
+				},
+
+				handleClick: function (event) {
+								if (this.state.currentValue == "black") {
+												var _this = this;
+												_this.setState({ currentValue: "green" });
+												setTimeout(function () {
+																_this.setState({ currentValue: "black" });
+												}, 2000);
+								}
+				},
+				render: function () {
+								return React.createElement('td', { onClick: this.handleClick, className: this.state.currentValue, __source: {
+																fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table-cell.js',
+																lineNumber: 28
+												}
+								});
+				}
 });
 
 var mapStateToProps = function (state) {
-	return state.color;
+				return state.color;
 };
 
 var mapDispatchToProps = function (dispatch) {
-	return {
-		green: function () {
-			dispatch(actions.colorGreen());
-		},
-		black: function () {
-			dispatch(actions.colorBlack());
-		}
-	};
+				return {
+								green: function () {
+												dispatch(actions.colorGreen());
+								},
+								black: function () {
+												dispatch(actions.colorBlack());
+								}
+				};
 };
 module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(TableCell);
 
 },{"../actions":2,"react":175,"react-redux":42}],5:[function(require,module,exports){
 var React = require('react'),
     TableCell = require('./table-cell'),
-    ptypes = React.PropTypes,
     ReactRedux = require('react-redux'),
     actions = require('../actions');
 
@@ -186,7 +191,7 @@ var Table = React.createClass({
 			cells.push(React.createElement(TableCell, {
 				__source: {
 					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
-					lineNumber: 13
+					lineNumber: 12
 				}
 			}));
 		}
@@ -196,7 +201,7 @@ var Table = React.createClass({
 				{
 					__source: {
 						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
-						lineNumber: 16
+						lineNumber: 15
 					}
 				},
 				cells
@@ -207,7 +212,7 @@ var Table = React.createClass({
 			{
 				__source: {
 					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
-					lineNumber: 19
+					lineNumber: 18
 				}
 			},
 			React.createElement(
@@ -215,7 +220,7 @@ var Table = React.createClass({
 				{
 					__source: {
 						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
-						lineNumber: 20
+						lineNumber: 19
 					}
 				},
 				React.createElement(
@@ -223,7 +228,7 @@ var Table = React.createClass({
 					{
 						__source: {
 							fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
-							lineNumber: 20
+							lineNumber: 19
 						}
 					},
 					rows
@@ -248,6 +253,7 @@ module.exports = function () {
 var initialState = require('./../initial-state');
 
 var ColorReducer = function (state, action) {
+	console.log('ColorReducer called. State: ', state, ', action:', action);
 	var newState = Object.assign({}, state);
 	switch (action.type) {
 		case 'COLOR_BLACK':
@@ -273,6 +279,7 @@ var reducers = Redux.combineReducers({
 });
 
 var store = Redux.createStore(reducers, initialState());
+console.log(store.getState());
 
 module.exports = store;
 

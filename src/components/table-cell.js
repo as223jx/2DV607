@@ -5,27 +5,31 @@ var React = require('react'),
 
 
 var TableCell = React.createClass({
+	propTypes: {
+        green: proptypes.func.isRequired,
+        black: proptypes.func.isRequired
+    },
+	
 	getInitialState : function() {
 		return { currentValue : this.props.currentValue };
 	},
 	
 	handleClick: function(event) {
-		console.log(this.state);
 		if(this.state.currentValue == "black") {
-			this.setState({ currentValue : "green" });
-		}
-		else {
-			this.setState({ currentValue : "black" });
+			var _this = this;
+			_this.setState({ currentValue : "green" });
+			setTimeout( function() {
+					_this.setState({ currentValue: "black" });				
+			}, 2000)
 		}
 	},
 	render: function() {
 		return (
 			<td onClick={this.handleClick} className={this.state.currentValue}></td>
 		);
-	
 	}
 });
-		
+
 var mapStateToProps = function(state){
     return state.color;
 };

@@ -1,6 +1,5 @@
 var React = require('react'),
 	TableCell = require('./table-cell'),
-    ptypes = React.PropTypes,
     ReactRedux = require('react-redux'),
     actions = require('../actions');
 

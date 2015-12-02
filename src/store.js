@@ -7,5 +7,6 @@ var reducers = Redux.combineReducers({
 });
 
 var store = Redux.createStore(reducers, initialState());
+console.log(store.getState())
 
 module.exports = store;
