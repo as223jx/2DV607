@@ -1,0 +1,5 @@
+**Entry 06 - Timers and actions/state confusion**
+
+So, I made a little timer that changes the color back to black two seconds after it's been clicked (changed to green).
+I am currently trying to figure out how to work with the actions and states in a good way together with my individual boxes (td-elements). As of now, I am just setting the state using this.setState({ currentValue : "green" }) and getting the state by this.state.currentValue. This means I am not actually using actions and reducers to set values to replace the color value of my applications initial state. This is because if I get and replace a global color state value, all my boxes will have the same color at all times. I suppose I should store an array in the state that keeps track of which boxes should be green and which ones should be black instead or something?
+Working on solving this though.
