@@ -9,7 +9,8 @@ var TableCell = React.createClass({
 	propTypes: {
         green: proptypes.func.isRequired,
         black: proptypes.func.isRequired,
-		addActive: proptypes.func.isRequired
+		addActive: proptypes.func.isRequired,
+		removeActive: proptypes.func.isRequired
     },
 	
 	getInitialState : function() {
@@ -17,14 +18,13 @@ var TableCell = React.createClass({
 	},
 	
 	handleClick: function(event) {
-		console.log(this.state.currentValue);
-		console.log(this.state.id);
 		if(this.state.currentValue == "black") {
 			var _this = this;
 			_this.props.addActive(this.state.id);
 			_this.setState({ currentValue : "green" });
 			setTimeout( function() {
-					_this.setState({ currentValue: "black" });				
+					_this.props.removeActive(_this.state.id);
+					_this.setState({ currentValue: "black" });
 			}, 2000)
 		}
 	},
@@ -49,6 +49,9 @@ var mapDispatchToProps = function(dispatch){
         },
 		addActive: function(id){
 			dispatch(actions.addActive(id));
+		},
+		removeActive: function(id){
+			dispatch(actions.removeActive(id));
 		}
     }
 };

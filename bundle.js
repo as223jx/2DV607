@@ -101,6 +101,9 @@ module.exports = {
 	},
 	addActive: function (id) {
 		return { type: 'ADD_ACTIVE', id: id };
+	},
+	removeActive: function (id) {
+		return { type: 'REMOVE_ACTIVE', id: id };
 	}
 };
 
@@ -140,7 +143,8 @@ var TableCell = React.createClass({
 	propTypes: {
 		green: proptypes.func.isRequired,
 		black: proptypes.func.isRequired,
-		addActive: proptypes.func.isRequired
+		addActive: proptypes.func.isRequired,
+		removeActive: proptypes.func.isRequired
 	},
 
 	getInitialState: function () {
@@ -148,13 +152,12 @@ var TableCell = React.createClass({
 	},
 
 	handleClick: function (event) {
-		console.log(this.state.currentValue);
-		console.log(this.state.id);
 		if (this.state.currentValue == "black") {
 			var _this = this;
 			_this.props.addActive(this.state.id);
 			_this.setState({ currentValue: "green" });
 			setTimeout(function () {
+				_this.props.removeActive(_this.state.id);
 				_this.setState({ currentValue: "black" });
 			}, 2000);
 		}
@@ -182,6 +185,9 @@ var mapDispatchToProps = function (dispatch) {
 		},
 		addActive: function (id) {
 			dispatch(actions.addActive(id));
+		},
+		removeActive: function (id) {
+			dispatch(actions.removeActive(id));
 		}
 	};
 };
@@ -266,12 +272,15 @@ module.exports = function () {
 var initialState = require('./../initial-state');
 
 var ActiveReducer = function (state, action) {
-	console.log('ActiveReducer called. State: ', state, ', action:', action);
+	console.log('ActiveReducer called. Current state: ', state, ', action:', action);
 	var newState = Object.assign([], state);
 	switch (action.type) {
 		case 'ADD_ACTIVE':
 			return [...newState, action.id];
-
+		case 'REMOVE_ACTIVE':
+			var index = newState.indexOf(action.id);
+			if (index != -1) newState.splice(index, 1);
+			return newState;
 		default:
 			return state || initialState();
 	}
@@ -283,7 +292,7 @@ module.exports = ActiveReducer;
 var initialState = require('./../initial-state');
 
 var ColorReducer = function (state, action) {
-	console.log('ColorReducer called. State: ', state, ', action:', action);
+	console.log('ColorReducer called. Current state: ', state, ', action:', action);
 	var newState = Object.assign({}, state);
 	switch (action.type) {
 		case 'COLOR_BLACK':
@@ -313,9 +322,6 @@ var reducers = Redux.combineReducers({
 
 var store = Redux.createStore(reducers, initialState());
 console.log(store.getState());
-store.dispatch({ type: 'ADD_ACTIVE', id: 1 });
-console.log(store.getState());
-
 module.exports = store;
 
 },{"./actions":2,"./initial-state":6,"./reducers/active":7,"./reducers/color":8,"redux":178}],10:[function(require,module,exports){

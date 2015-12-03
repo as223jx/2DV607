@@ -1,7 +1,7 @@
 var initialState = require('./../initial-state');
 
 var ColorReducer = function(state, action){
-	console.log('ColorReducer called. State: ', state, ', action:', action)
+	console.log('ColorReducer called. Current state: ', state, ', action:', action)
 	var newState = Object.assign({}, state);
 	switch(action.type){
 		case 'COLOR_BLACK':
