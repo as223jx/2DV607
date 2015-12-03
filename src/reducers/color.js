@@ -11,7 +11,7 @@ var ColorReducer = function(state, action){
 			newState.currentValue = "green";
 			return newState;
 		default:
-		return state || initialState().color;
+		return state || initialState();
 	}
 };
 
