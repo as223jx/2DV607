@@ -1,12 +1,10 @@
 var Redux = require('redux');
 var colorReducer = require('./reducers/color');
-var activeReducer = require('./reducers/active');
 var initialState = require('./initial-state');
 var actions = require('./actions');
 
 var reducers = Redux.combineReducers({
-	color: colorReducer,
-	active: activeReducer
+	color: colorReducer
 });
 
 var store = Redux.createStore(reducers, initialState());

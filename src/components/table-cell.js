@@ -14,10 +14,11 @@ var TableCell = React.createClass({
     },
 	
 	getInitialState : function() {
-		return { currentValue : this.props.currentValue, id : id }
+		return { currentValue : this.props.currentValue, active : this.props.active, id : id }
 	},
 	
 	handleClick: function(event) {
+		console.log(this.props.active);
 		if(this.state.currentValue == "black") {
 			var _this = this;
 			_this.props.addActive(this.state.id);
@@ -28,7 +29,8 @@ var TableCell = React.createClass({
 			}, 2000)
 		}
 	},
-	render: function() {
+	
+	render: function() {		
 		return (
 			<td onClick={this.handleClick} className={this.state.currentValue} id={id++}></td>
 		);
