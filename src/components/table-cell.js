@@ -19,13 +19,12 @@ var TableCell = React.createClass({
 	
 	handleClick: function(event) {
 		if(this.state.currentValue == "black") {
-			var _this = this;
-			_this.props.addActive(this.state.id);
-			_this.setState({ currentValue : "green" });
+			this.props.addActive(this.state.id);
+			this.setState({ currentValue : "green" });
 			setTimeout( function() {
-					_this.props.removeActive(_this.state.id);
-					_this.setState({ currentValue: "black" });
-			}, 2000)
+					this.props.removeActive(this.state.id);
+					this.setState({ currentValue: "black" });
+			}.bind(this), 2000)
 		}
 	},
 	render: function() {
