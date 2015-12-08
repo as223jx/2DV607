@@ -1,14 +1,6 @@
 var React = require('react'),
     proptypes = React.PropTypes;
 
-var Score = React.createClass({
-	
-	render: function() {	
-
-		return (
-			<p>Current clicks: {this.props.score}</p>
-		);
-	}
-});
+var Score = (props)=> { return <p>Current clicks: {props.score}</p>; };
 
 module.exports = Score;
