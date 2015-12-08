@@ -4,14 +4,6 @@ var React = require('react'),
     actions = require('../actions');
 
 	
-var TableCell = React.createClass({
-	
-	render: function() {	
-
-		return (
-			<td onClick={this.props.onClick} className={this.props.isActive} id={this.props.id}></td>
-		);
-	}
-});
+var TableCell = (props)=> { return <td onClick={props.onClick} className={props.isActive} id={props.id}></td>; };
 
 module.exports = TableCell;
