@@ -6,13 +6,16 @@ var React = require('react'),
 var Table = React.createClass({
 
     render: function(){
+		id = 0;
 		cells = [];
 		rows = [];
+		
 		for(var i = 0; i < 4; i++) {
-			cells.push(<TableCell />);
-		}
-		for(var i = 0; i < 4; i++) {
+			for(var j = 0; j < 4;j++) {
+				cells.push(<TableCell id={id++} />);
+			}
 			rows.push(<tr>{cells}</tr>);
+			cells=[];
 		}
         return (
             <div>

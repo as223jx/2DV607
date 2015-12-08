@@ -93,12 +93,6 @@ process.umask = function() { return 0; };
 
 },{}],2:[function(require,module,exports){
 module.exports = {
-	colorBlack: function () {
-		return { type: 'COLOR_BLACK' };
-	},
-	colorGreen: function () {
-		return { type: 'COLOR_GREEN' };
-	},
 	addActive: function (id) {
 		return { type: 'ADD_ACTIVE', id: id };
 	},
@@ -135,39 +129,38 @@ var React = require('react'),
     ReactRedux = require('react-redux'),
     actions = require('../actions');
 
-var id = 0;
+const black = "black";
+const green = "green";
 
 var TableCell = React.createClass({
 	displayName: 'TableCell',
 
 	propTypes: {
-		green: proptypes.func.isRequired,
-		black: proptypes.func.isRequired,
 		addActive: proptypes.func.isRequired,
 		removeActive: proptypes.func.isRequired
 	},
 
 	getInitialState: function () {
-		return { currentValue: this.props.currentValue, active: this.props.active, id: id };
+		return { currentValue: black, active: this.props.active, id: this.props.id };
 	},
 
 	handleClick: function (event) {
 		console.log(this.props.active);
-		if (this.state.currentValue == "black") {
+		if (this.state.currentValue == black) {
+			this.props.addActive(this.state.id);
+			this.setState({ currentValue: green });
 			var _this = this;
-			_this.props.addActive(this.state.id);
-			_this.setState({ currentValue: "green" });
 			setTimeout(function () {
 				_this.props.removeActive(_this.state.id);
-				_this.setState({ currentValue: "black" });
+				_this.setState({ currentValue: black });
 			}, 2000);
 		}
 	},
 
 	render: function () {
-		return React.createElement('td', { onClick: this.handleClick, className: this.state.currentValue, id: id++, __source: {
+		return React.createElement('td', { onClick: this.handleClick, className: this.state.currentValue, id: this.state.id, __source: {
 				fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table-cell.js',
-				lineNumber: 35
+				lineNumber: 34
 			}
 		});
 	}
@@ -179,12 +172,6 @@ var mapStateToProps = function (state) {
 
 var mapDispatchToProps = function (dispatch) {
 	return {
-		green: function () {
-			dispatch(actions.colorGreen());
-		},
-		black: function () {
-			dispatch(actions.colorBlack());
-		},
 		addActive: function (id) {
 			dispatch(actions.addActive(id));
 		},
@@ -205,34 +192,36 @@ var Table = React.createClass({
 	displayName: 'Table',
 
 	render: function () {
+		id = 0;
 		cells = [];
 		rows = [];
+
 		for (var i = 0; i < 4; i++) {
-			cells.push(React.createElement(TableCell, {
-				__source: {
-					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
-					lineNumber: 12
-				}
-			}));
-		}
-		for (var i = 0; i < 4; i++) {
+			for (var j = 0; j < 4; j++) {
+				cells.push(React.createElement(TableCell, { id: id++, __source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
+						lineNumber: 15
+					}
+				}));
+			}
 			rows.push(React.createElement(
 				'tr',
 				{
 					__source: {
 						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
-						lineNumber: 15
+						lineNumber: 17
 					}
 				},
 				cells
 			));
+			cells = [];
 		}
 		return React.createElement(
 			'div',
 			{
 				__source: {
 					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
-					lineNumber: 18
+					lineNumber: 21
 				}
 			},
 			React.createElement(
@@ -240,7 +229,7 @@ var Table = React.createClass({
 				{
 					__source: {
 						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
-						lineNumber: 19
+						lineNumber: 22
 					}
 				},
 				React.createElement(
@@ -248,7 +237,7 @@ var Table = React.createClass({
 					{
 						__source: {
 							fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
-							lineNumber: 19
+							lineNumber: 22
 						}
 					},
 					rows
@@ -264,7 +253,6 @@ module.exports = Table;
 module.exports = function () {
 	return {
 		color: {
-			currentValue: "black",
 			active: []
 		}
 	};
@@ -277,12 +265,6 @@ var ColorReducer = function (state, action) {
 	console.log('ColorReducer called. Current state: ', state, ', action:', action);
 	var newState = Object.assign({}, state);
 	switch (action.type) {
-		case 'COLOR_BLACK':
-			newState.currentValue = "black";
-			return newState;
-		case 'COLOR_GREEN':
-			newState.currentValue = "green";
-			return newState;
 		case 'ADD_ACTIVE':
 			newState.active = [...newState.active, action.id];
 			return newState;
