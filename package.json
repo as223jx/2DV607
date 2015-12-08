@@ -6,8 +6,11 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-	"build": "browserify -t [ babelify --presets [ react ] ] src/app.js -o bundle.js"
+    "build": "browserify -t [ babelify --presets [ react ] ] src/app.js -o bundle.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "redux-thunk": "^1.0.0"
+  }
 }

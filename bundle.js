@@ -94,10 +94,12 @@ process.umask = function() { return 0; };
 },{}],2:[function(require,module,exports){
 module.exports = {
 	addActive: function (id) {
-		return { type: 'ADD_ACTIVE', id: id };
-	},
-	removeActive: function (id) {
-		return { type: 'REMOVE_ACTIVE', id: id };
+		return function (dispatch, getState) {
+			dispatch({ type: 'ADD_ACTIVE', id: id });
+			setTimeout(function () {
+				dispatch({ type: 'REMOVE_ACTIVE', id: id });
+			}, 2000);
+		};
 	}
 };
 
@@ -129,78 +131,60 @@ var React = require('react'),
     ReactRedux = require('react-redux'),
     actions = require('../actions');
 
-const black = "black";
-const green = "green";
-
 var TableCell = React.createClass({
 	displayName: 'TableCell',
 
-	propTypes: {
-		addActive: proptypes.func.isRequired,
-		removeActive: proptypes.func.isRequired
-	},
-
-	getInitialState: function () {
-		return { currentValue: black, active: this.props.active, id: this.props.id };
-	},
-
-	handleClick: function (event) {
-		console.log(this.props.active);
-		if (this.state.currentValue == black) {
-			this.props.addActive(this.state.id);
-			this.setState({ currentValue: green });
-			var _this = this;
-			setTimeout(function () {
-				_this.props.removeActive(_this.state.id);
-				_this.setState({ currentValue: black });
-			}, 2000);
-		}
-	},
-
 	render: function () {
-		return React.createElement('td', { onClick: this.handleClick, className: this.state.currentValue, id: this.state.id, __source: {
+
+		return React.createElement('td', { onClick: this.props.onClick, className: this.props.isActive, id: this.props.id, __source: {
 				fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table-cell.js',
-				lineNumber: 34
+				lineNumber: 12
 			}
 		});
 	}
 });
 
-var mapStateToProps = function (state) {
-	return state.color;
-};
-
-var mapDispatchToProps = function (dispatch) {
-	return {
-		addActive: function (id) {
-			dispatch(actions.addActive(id));
-		},
-		removeActive: function (id) {
-			dispatch(actions.removeActive(id));
-		}
-	};
-};
-module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(TableCell);
+module.exports = TableCell;
 
 },{"../actions":2,"react":175,"react-redux":42}],5:[function(require,module,exports){
 var React = require('react'),
+    proptypes = React.PropTypes,
     TableCell = require('./table-cell'),
     ReactRedux = require('react-redux'),
     actions = require('../actions');
 
+const black = "black";
+const green = "green";
+
 var Table = React.createClass({
 	displayName: 'Table',
 
+	propTypes: {
+		tbl: proptypes.shape({ active: proptypes.arrayOf(proptypes.number) }).isRequired,
+		addActive: proptypes.func.isRequired
+	},
+
 	render: function () {
+		var tableprops = this.props.tbl;
 		id = 0;
 		cells = [];
 		rows = [];
+		var color;
+		var click;
 
 		for (var i = 0; i < 4; i++) {
 			for (var j = 0; j < 4; j++) {
-				cells.push(React.createElement(TableCell, { id: id++, __source: {
+				if (tableprops.active.indexOf(id) != -1) {
+					click = null;
+					color = green;
+				} else {
+					click = this.props.addActive.bind(this, id);
+					color = black;
+				}
+
+				cells.push(React.createElement(TableCell, { id: id++, isActive: color, onClick: click, __source: {
 						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
-						lineNumber: 15
+						lineNumber: 36
 					}
 				}));
 			}
@@ -209,7 +193,7 @@ var Table = React.createClass({
 				{
 					__source: {
 						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
-						lineNumber: 17
+						lineNumber: 38
 					}
 				},
 				cells
@@ -221,7 +205,7 @@ var Table = React.createClass({
 			{
 				__source: {
 					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
-					lineNumber: 21
+					lineNumber: 42
 				}
 			},
 			React.createElement(
@@ -229,7 +213,7 @@ var Table = React.createClass({
 				{
 					__source: {
 						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
-						lineNumber: 22
+						lineNumber: 43
 					}
 				},
 				React.createElement(
@@ -237,7 +221,7 @@ var Table = React.createClass({
 					{
 						__source: {
 							fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
-							lineNumber: 22
+							lineNumber: 43
 						}
 					},
 					rows
@@ -247,12 +231,24 @@ var Table = React.createClass({
 	}
 });
 
-module.exports = Table;
+var mapStateToProps = function (state) {
+	return { tbl: state.table };
+};
+
+var mapDispatchToProps = function (dispatch) {
+	return {
+		addActive: function (id) {
+			dispatch(actions.addActive(id));
+		}
+	};
+};
+
+module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(Table);
 
 },{"../actions":2,"./table-cell":4,"react":175,"react-redux":42}],6:[function(require,module,exports){
 module.exports = function () {
 	return {
-		color: {
+		table: {
 			active: []
 		}
 	};
@@ -261,39 +257,43 @@ module.exports = function () {
 },{}],7:[function(require,module,exports){
 var initialState = require('./../initial-state');
 
-var ColorReducer = function (state, action) {
-	console.log('ColorReducer called. Current state: ', state, ', action:', action);
+var ActiveReducer = function (state, action) {
+	console.log('ActiveReducer called. Current state: ', state, ', action:', action);
 	var newState = Object.assign({}, state);
+	console.log(newState.active);
 	switch (action.type) {
 		case 'ADD_ACTIVE':
-			newState.active = [...newState.active, action.id];
+			console.log(action);
+			newState.active.push(action.id);
+			//newState.active = [...newState.active, action.id ];
 			return newState;
 		case 'REMOVE_ACTIVE':
 			var index = newState.active.indexOf(action.id);
 			if (index != -1) newState.active.splice(index, 1);
 			return newState;
 		default:
-			return state || initialState();
+			return state || initialState().table;
 	}
 };
 
-module.exports = ColorReducer;
+module.exports = ActiveReducer;
 
 },{"./../initial-state":6}],8:[function(require,module,exports){
 var Redux = require('redux');
-var colorReducer = require('./reducers/color');
+var activeReducer = require('./reducers/active');
 var initialState = require('./initial-state');
 var actions = require('./actions');
+var thunk = require('redux-thunk');
 
 var reducers = Redux.combineReducers({
-	color: colorReducer
+	table: activeReducer
 });
 
-var store = Redux.createStore(reducers, initialState());
-console.log(store.getState());
-module.exports = store;
+//var store = Redux.createStore(reducers, initialState());
+//console.log(store.getState())
+module.exports = Redux.applyMiddleware(thunk)(Redux.createStore)(reducers, initialState());
 
-},{"./actions":2,"./initial-state":6,"./reducers/color":7,"redux":177}],9:[function(require,module,exports){
+},{"./actions":2,"./initial-state":6,"./reducers/active":7,"redux":178,"redux-thunk":176}],9:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -2174,7 +2174,7 @@ function wrapActionCreators(actionCreators) {
 }
 
 module.exports = exports['default'];
-},{"redux":177}],47:[function(require,module,exports){
+},{"redux":178}],47:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -19836,6 +19836,24 @@ module.exports = require('./lib/React');
 'use strict';
 
 exports.__esModule = true;
+exports['default'] = thunkMiddleware;
+
+function thunkMiddleware(_ref) {
+  var dispatch = _ref.dispatch;
+  var getState = _ref.getState;
+
+  return function (next) {
+    return function (action) {
+      return typeof action === 'function' ? action(dispatch, getState) : next(action);
+    };
+  };
+}
+
+module.exports = exports['default'];
+},{}],177:[function(require,module,exports){
+'use strict';
+
+exports.__esModule = true;
 exports['default'] = createStore;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -19996,7 +20014,7 @@ function createStore(reducer, initialState) {
     replaceReducer: replaceReducer
   };
 }
-},{"./utils/isPlainObject":182}],177:[function(require,module,exports){
+},{"./utils/isPlainObject":183}],178:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -20028,7 +20046,7 @@ exports.combineReducers = _utilsCombineReducers2['default'];
 exports.bindActionCreators = _utilsBindActionCreators2['default'];
 exports.applyMiddleware = _utilsApplyMiddleware2['default'];
 exports.compose = _utilsCompose2['default'];
-},{"./createStore":176,"./utils/applyMiddleware":178,"./utils/bindActionCreators":179,"./utils/combineReducers":180,"./utils/compose":181}],178:[function(require,module,exports){
+},{"./createStore":177,"./utils/applyMiddleware":179,"./utils/bindActionCreators":180,"./utils/combineReducers":181,"./utils/compose":182}],179:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -20090,7 +20108,7 @@ function applyMiddleware() {
 }
 
 module.exports = exports['default'];
-},{"./compose":181}],179:[function(require,module,exports){
+},{"./compose":182}],180:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -20146,7 +20164,7 @@ function bindActionCreators(actionCreators, dispatch) {
 }
 
 module.exports = exports['default'];
-},{"../utils/mapValues":183}],180:[function(require,module,exports){
+},{"../utils/mapValues":184}],181:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -20280,7 +20298,7 @@ function combineReducers(reducers) {
 
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"../createStore":176,"../utils/isPlainObject":182,"../utils/mapValues":183,"../utils/pick":184,"_process":1}],181:[function(require,module,exports){
+},{"../createStore":177,"../utils/isPlainObject":183,"../utils/mapValues":184,"../utils/pick":185,"_process":1}],182:[function(require,module,exports){
 /**
  * Composes single-argument functions from right to left.
  *
@@ -20306,9 +20324,9 @@ function compose() {
 }
 
 module.exports = exports["default"];
-},{}],182:[function(require,module,exports){
+},{}],183:[function(require,module,exports){
 arguments[4][44][0].apply(exports,arguments)
-},{"dup":44}],183:[function(require,module,exports){
+},{"dup":44}],184:[function(require,module,exports){
 /**
  * Applies a function to every key-value pair inside an object.
  *
@@ -20329,7 +20347,7 @@ function mapValues(obj, fn) {
 }
 
 module.exports = exports["default"];
-},{}],184:[function(require,module,exports){
+},{}],185:[function(require,module,exports){
 /**
  * Picks key-value pairs from an object where values satisfy a predicate.
  *

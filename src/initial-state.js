@@ -1,6 +1,6 @@
 module.exports = function(){
 	return {
-		color: {
+		table: {
 			active: []
 		}
 	}
