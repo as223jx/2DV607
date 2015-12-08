@@ -1,7 +1,8 @@
 module.exports = function(){
 	return {
 		table: {
-			active: []
+			active: [],
+			score: 0
 		}
 	}
 };

@@ -7,7 +7,4 @@ module.exports = {
 			},2000);
 		}
 	},
-/* 	removeActive: function(id){
-		return {type: 'REMOVE_ACTIVE', id: id};
-	} */
 };

@@ -6,9 +6,8 @@ var ActiveReducer = function(state, action){
 	console.log(newState.active);
 	switch(action.type){
 		case 'ADD_ACTIVE':
-		console.log(action);
-		newState.active.push(action.id);
-			//newState.active = [...newState.active, action.id ];
+			newState.active.push(action.id);
+			newState.score ++;
 			return newState;
 		case 'REMOVE_ACTIVE':
 			var index = newState.active.indexOf(action.id);

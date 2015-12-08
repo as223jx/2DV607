@@ -8,6 +8,4 @@ var reducers = Redux.combineReducers({
 	table: activeReducer
 });
 
-//var store = Redux.createStore(reducers, initialState());
-//console.log(store.getState())
 module.exports = Redux.applyMiddleware(thunk)(Redux.createStore)(reducers, initialState());
