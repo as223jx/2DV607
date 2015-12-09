@@ -186,24 +186,19 @@ module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(Home);
 var React = require('react'),
     proptypes = React.PropTypes;
 
-var Score = React.createClass({
-	displayName: 'Score',
-
-	render: function () {
-
-		return React.createElement(
-			'p',
-			{
-				__source: {
-					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\score.js',
-					lineNumber: 9
-				}
-			},
-			'Current clicks: ',
-			this.props.score
-		);
-	}
-});
+var Score = props => {
+    return React.createElement(
+        'p',
+        {
+            __source: {
+                fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\score.js',
+                lineNumber: 4
+            }
+        },
+        'Current clicks: ',
+        props.score
+    );
+};
 
 module.exports = Score;
 
@@ -213,18 +208,13 @@ var React = require('react'),
     ReactRedux = require('react-redux'),
     actions = require('../actions');
 
-var TableCell = React.createClass({
-	displayName: 'TableCell',
-
-	render: function () {
-
-		return React.createElement('td', { onClick: this.props.onClick, className: this.props.isActive, id: this.props.id, __source: {
-				fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table-cell.js',
-				lineNumber: 12
-			}
-		});
-	}
-});
+var TableCell = props => {
+    return React.createElement('td', { onClick: props.onClick, className: props.isActive, id: props.id, __source: {
+            fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table-cell.js',
+            lineNumber: 7
+        }
+    });
+};
 
 module.exports = TableCell;
 
