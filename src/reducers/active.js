@@ -2,16 +2,19 @@ var initialState = require('./../initial-state');
 
 var ActiveReducer = function(state, action){
 	console.log('ActiveReducer called. Current state: ', state, ', action:', action)
-	var newState = Object.assign([], state);
+	var newState = Object.assign({}, state);
+	console.log(newState.active);
 	switch(action.type){
 		case 'ADD_ACTIVE':
-			return [...newState, action.id ]
+			newState.active.push(action.id);
+			newState.score ++;
+			return newState;
 		case 'REMOVE_ACTIVE':
-			var index = newState.indexOf(action.id);
-			if(index != -1) newState.splice(index, 1); 
-			return 	newState;
+			var index = newState.active.indexOf(action.id);
+			if(index != -1) newState.active.splice(index, 1); 
+			return newState;
 		default:
-		return state || initialState();
+		return state || initialState().table;
 	}
 };
 

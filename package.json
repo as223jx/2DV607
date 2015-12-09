@@ -1,9 +1,14 @@
 {
   "name": "testredux",
   "version": "1.0.0",
+  "author": "",
+  "license": "ISC",
   "private": true,
   "description": "Test",
   "main": "app.js",
+  "dependencies": {
+    "redux-thunk": "^1.0.0"
+  },
   "devDependencies": {
     "babel-preset-react": "6.1.18",
     "babelify": "7.2.0",
@@ -16,7 +21,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "browserify --debug -t [ babelify --presets [ react ] ] src/app.js -o bundle.js"
-  },
-  "author": "",
-  "license": "ISC"
+  }
 }
+

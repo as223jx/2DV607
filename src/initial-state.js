@@ -1,8 +1,8 @@
 module.exports = function(){
 	return {
-		color: {
-			currentValue: "black"
-		},
-		active: []
+		table: {
+			active: [],
+			score: 0
+		}
 	}
 };
