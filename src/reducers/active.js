@@ -13,6 +13,16 @@ var ActiveReducer = function(state, action){
 			var index = newState.active.indexOf(action.id);
 			if(index != -1) newState.active.splice(index, 1); 
 			return newState;
+		case 'START_GAME':
+			if(!newState.started){
+				newState.started = true;
+			}
+			return newState;
+		case 'STOP_GAME':
+			if(newState.started){
+				newState.started = false;
+			}
+			return newState;
 		default:
 		return state || initialState().table;
 	}

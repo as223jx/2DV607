@@ -100,6 +100,29 @@ module.exports = {
 				dispatch({ type: 'REMOVE_ACTIVE', id: id });
 			}, 2000);
 		};
+	},
+	startGame: function () {
+		return function (dispatch, getState) {
+			var addRandom = function () {
+				if (getState().table.started) {
+
+					var random = Math.floor(Math.random() * 15 + 1);
+					dispatch({ type: 'ADD_ACTIVE', id: random });
+
+					setTimeout(function () {
+						dispatch({ type: 'REMOVE_ACTIVE', id: random });
+					}, 2000);
+					setTimeout(addRandom, 2000);
+				}
+			};
+			dispatch({ type: 'START_GAME' });
+			setTimeout(addRandom, 2000);
+		};
+	},
+	stopGame: function () {
+		return function (dispatch, getState) {
+			dispatch({ type: 'STOP_GAME' });
+		};
 	}
 };
 
@@ -128,7 +151,7 @@ ReactDOM.render(React.createElement(
 },{"./components/wrapper":8,"./store":11,"react":178,"react-dom":41,"react-redux":45}],4:[function(require,module,exports){
 var React = require('react'),
     proptypes = React.PropTypes,
-    Table = require('./tableNew'),
+    Table = require('./table'),
     ReactRedux = require('react-redux'),
     actions = require('../actions'),
     Score = require('./score');
@@ -137,52 +160,80 @@ const black = "black";
 const green = "green";
 
 var Home = React.createClass({
-				displayName: 'Home',
+	displayName: 'Home',
 
-				propTypes: {
-								tbl: proptypes.shape({ active: proptypes.arrayOf(proptypes.number), score: proptypes.number.isRequired }).isRequired,
-								addActive: proptypes.func.isRequired
-				},
+	propTypes: {
+		tbl: proptypes.shape({ active: proptypes.arrayOf(proptypes.number), score: proptypes.number.isRequired, started: proptypes.bool.isRequired }).isRequired,
+		addActive: proptypes.func.isRequired,
+		startGame: proptypes.func.isRequired
+	},
 
-				render: function () {
-								var tableprops = this.props.tbl;
-								return React.createElement(
-												'div',
-												{
-																__source: {
-																				fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\home.js',
-																				lineNumber: 21
-																}
-												},
-												React.createElement(Table, { onClick: this.props.addActive, activeCells: tableprops.active, __source: {
-																				fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\home.js',
-																				lineNumber: 22
-																}
-												}),
-												React.createElement(Score, { score: tableprops.score, __source: {
-																				fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\home.js',
-																				lineNumber: 23
-																}
-												})
-								);
+	render: function () {
+		var tableprops = this.props.tbl;
+		var button = React.createElement(
+			'button',
+			{ onClick: this.props.startGame, __source: {
+					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\home.js',
+					lineNumber: 21
 				}
+			},
+			'Start'
+		);
+		if (tableprops.started) {
+			button = React.createElement(
+				'button',
+				{ onClick: this.props.stopGame, __source: {
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\home.js',
+						lineNumber: 23
+					}
+				},
+				'Stop'
+			);
+		}
+		return React.createElement(
+			'div',
+			{
+				__source: {
+					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\home.js',
+					lineNumber: 26
+				}
+			},
+			button,
+			React.createElement(Table, { onClick: this.props.addActive, activeCells: tableprops.active, __source: {
+					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\home.js',
+					lineNumber: 28
+				}
+			}),
+			React.createElement(Score, { score: tableprops.score, __source: {
+					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\home.js',
+					lineNumber: 29
+				}
+			})
+		);
+	}
 });
 
 var mapStateToProps = function (state) {
-				return { tbl: state.table };
+	return { tbl: state.table };
 };
 
 var mapDispatchToProps = function (dispatch) {
-				return {
-								addActive: function (id) {
-												dispatch(actions.addActive(id));
-								}
-				};
+	return {
+		addActive: function (id) {
+			dispatch(actions.addActive(id));
+		},
+		startGame: function () {
+			dispatch(actions.startGame());
+		},
+		stopGame: function () {
+			dispatch(actions.stopGame());
+		}
+	};
 };
 
 module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(Home);
 
-},{"../actions":2,"./score":5,"./tableNew":7,"react":178,"react-redux":45}],5:[function(require,module,exports){
+},{"../actions":2,"./score":5,"./table":7,"react":178,"react-redux":45}],5:[function(require,module,exports){
 var React = require('react'),
     proptypes = React.PropTypes;
 
@@ -195,7 +246,7 @@ var Score = props => {
                 lineNumber: 4
             }
         },
-        'Current clicks: ',
+        'Color count: ',
         props.score
     );
 };
@@ -248,7 +299,7 @@ var Table = React.createClass({
 				}
 
 				cells.push(React.createElement(TableCell, { id: id++, isActive: color, onClick: click, __source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\tableNew.js',
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
 						lineNumber: 29
 					}
 				}));
@@ -257,7 +308,7 @@ var Table = React.createClass({
 				'tr',
 				{
 					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\tableNew.js',
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
 						lineNumber: 31
 					}
 				},
@@ -269,7 +320,7 @@ var Table = React.createClass({
 			'div',
 			{
 				__source: {
-					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\tableNew.js',
+					fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
 					lineNumber: 35
 				}
 			},
@@ -277,7 +328,7 @@ var Table = React.createClass({
 				'table',
 				{
 					__source: {
-						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\tableNew.js',
+						fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
 						lineNumber: 36
 					}
 				},
@@ -285,7 +336,7 @@ var Table = React.createClass({
 					'tbody',
 					{
 						__source: {
-							fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\tableNew.js',
+							fileName: '..\\..\\..\\Documents\\GitHub\\2DV607\\src\\components\\table.js',
 							lineNumber: 36
 						}
 					},
@@ -339,6 +390,7 @@ module.exports = Wrapper;
 module.exports = function () {
 	return {
 		table: {
+			started: false,
 			active: [],
 			score: 0
 		}
@@ -360,6 +412,16 @@ var ActiveReducer = function (state, action) {
 		case 'REMOVE_ACTIVE':
 			var index = newState.active.indexOf(action.id);
 			if (index != -1) newState.active.splice(index, 1);
+			return newState;
+		case 'START_GAME':
+			if (!newState.started) {
+				newState.started = true;
+			}
+			return newState;
+		case 'STOP_GAME':
+			if (newState.started) {
+				newState.started = false;
+			}
 			return newState;
 		default:
 			return state || initialState().table;

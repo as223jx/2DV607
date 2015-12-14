@@ -7,4 +7,28 @@ module.exports = {
 			},2000);
 		}
 	},
+	startGame: function(){
+		return function(dispatch, getState){
+				var addRandom = (function(){
+					if(getState().table.started){
+
+					var random = Math.floor((Math.random() * 15) +1);
+					dispatch({type:'ADD_ACTIVE', id:random});
+					
+					setTimeout(function(){
+						dispatch({type:'REMOVE_ACTIVE', id:random});
+					},2000);
+					setTimeout(addRandom,2000);
+					}
+				});
+				dispatch({type:'START_GAME'});
+				setTimeout(addRandom,2000);
+			}
+		
+	},
+	stopGame: function(){
+		return function(dispatch, getState){
+			dispatch({type:'STOP_GAME'});
+		}
+	}
 };
