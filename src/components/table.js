@@ -22,9 +22,10 @@ var Table = React.createClass({
 					color = green;
 				}
 				else{
-					click = this.props.onClick.bind(this, id);
+
 					color = black;
 				}
+									click = this.props.onClick.bind(this, id);
 
 				cells.push(<TableCell id={id++} isActive={color} onClick={click} />);
 			}

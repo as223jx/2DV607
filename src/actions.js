@@ -30,5 +30,14 @@ module.exports = {
 		return function(dispatch, getState){
 			dispatch({type:'STOP_GAME'});
 		}
+	},
+	killMole: function(id){
+		return function(dispatch, getState){
+			console.log("Killmole");
+			if(getState().table.started && getState().table.active.indexOf(id) != -1){
+				dispatch({type:'KILL_MOLE', id:id});
+				dispatch({type:'REMOVE_ACTIVE', id:id});
+			}
+		}
 	}
 };

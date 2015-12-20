@@ -7,7 +7,6 @@ var ActiveReducer = function(state, action){
 	switch(action.type){
 		case 'ADD_ACTIVE':
 			newState.active.push(action.id);
-			newState.score ++;
 			return newState;
 		case 'REMOVE_ACTIVE':
 			var index = newState.active.indexOf(action.id);
@@ -21,6 +20,12 @@ var ActiveReducer = function(state, action){
 		case 'STOP_GAME':
 			if(newState.started){
 				newState.started = false;
+			}
+			return newState;
+		case 'KILL_MOLE':
+		console.log(newState.active.indexOf(action.id));
+			if(newState.started && newState.active.indexOf(action.id) != -1){
+				newState.score ++;
 			}
 			return newState;
 		default:

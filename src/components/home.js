@@ -13,7 +13,8 @@ var Home = React.createClass({
 	propTypes: {
 		tbl: proptypes.shape({active: proptypes.arrayOf(proptypes.number), score: proptypes.number.isRequired, started: proptypes.bool.isRequired}).isRequired,
 		addActive: proptypes.func.isRequired,
-		startGame: proptypes.func.isRequired
+		startGame: proptypes.func.isRequired,
+		killMole: proptypes.func.isRequired
     },
 	
     render: function(){
@@ -25,7 +26,7 @@ var Home = React.createClass({
         return (
             <div>
 			{button}
-				<Table onClick={this.props.addActive} activeCells={tableprops.active} />
+				<Table onClick={this.props.killMole} activeCells={tableprops.active} />
 				<Score score={tableprops.score} />
             </div>
         );
@@ -46,6 +47,9 @@ var mapDispatchToProps = function(dispatch){
 		},
 		stopGame: function(){
 			dispatch(actions.stopGame());
+		},
+		killMole: function(id){
+			dispatch(actions.killMole(id));
 		}
     }
 };
