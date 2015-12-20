@@ -16,7 +16,10 @@ module.exports = {
 					dispatch({type:'ADD_ACTIVE', id:random});
 					
 					setTimeout(function(){
+						if(getState().table.active.indexOf(random) != -1){
 						dispatch({type:'REMOVE_ACTIVE', id:random});
+						dispatch({type:'MISS_MOLE'});
+						}
 					},2000);
 					setTimeout(addRandom,2000);
 					}

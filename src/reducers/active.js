@@ -28,6 +28,11 @@ var ActiveReducer = function(state, action){
 				newState.score ++;
 			}
 			return newState;
+		case 'MISS_MOLE':
+			if(newState.started && newState.score > 0){
+				newState.score--;
+			}
+			return newState;
 		default:
 		return state || initialState().table;
 	}
