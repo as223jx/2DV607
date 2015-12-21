@@ -6,11 +6,11 @@ var ActiveReducer = function(state, action){
 	console.log(newState.active);
 	switch(action.type){
 		case 'ADD_ACTIVE':
-			newState.active.push(action.id);
+			newmole = true;
+			newState.active[action.id] = newmole;
 			return newState;
 		case 'REMOVE_ACTIVE':
-			var index = newState.active.indexOf(action.id);
-			if(index != -1) newState.active.splice(index, 1); 
+			delete newState.active[action.id];
 			return newState;
 		case 'START_GAME':
 			if(!newState.started){
@@ -23,8 +23,8 @@ var ActiveReducer = function(state, action){
 			}
 			return newState;
 		case 'KILL_MOLE':
-		console.log(newState.active.indexOf(action.id));
-			if(newState.started && newState.active.indexOf(action.id) != -1){
+		console.log(action.id);
+			if(newState.started && newState.active[action.id]){
 				newState.score ++;
 			}
 			return newState;

@@ -2,7 +2,7 @@ module.exports = function(){
 	return {
 		table: {
 			started: false,
-			active: [],
+			active: {},
 			score: 0
 		}
 	}

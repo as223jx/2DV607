@@ -15,9 +15,10 @@ var Table = React.createClass({
 		rows = [];
 		var color;
 		var click;
+
 		for(var i = 0; i < 4; i++) {
 			for(var j = 0; j < 4;j++) {
-				if(this.props.activeCells.indexOf(id) != -1){
+				if(this.props.activeCells[id]){
 					click = null;
 					color = green;
 				}
@@ -28,9 +29,11 @@ var Table = React.createClass({
 
 				cells.push(<TableCell id={id++} isActive={color} onClick={click} />);
 			}
+
 			rows.push(<tr>{cells}</tr>);
 			cells=[];
 		}
+
         return (
             <div>
 				<table><tbody>{rows}</tbody></table>
@@ -38,7 +41,5 @@ var Table = React.createClass({
         );
     }
 });
-
-
 
 module.exports = Table;
