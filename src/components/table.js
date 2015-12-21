@@ -35,9 +35,7 @@ var Table = React.createClass({
 		}
 
         return (
-            <div>
 				<table><tbody>{rows}</tbody></table>
-            </div>
         );
     }
 });

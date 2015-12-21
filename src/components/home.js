@@ -24,7 +24,7 @@ var Home = React.createClass({
 			button = <button onClick={this.props.stopGame}>Stop</button>;
 		}
         return (
-            <div>
+            <div id='tableDiv'>
 			{button}
 				<Table onClick={this.props.clickSquare} activeCells={tableprops.active} />
 				<Score score={tableprops.score} />

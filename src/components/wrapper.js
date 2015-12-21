@@ -5,7 +5,7 @@ var Wrapper = React.createClass({
     render: function() {
         return (
             <div className="wrapper">
-                <h2>Very unfinished game!</h2>
+                <h2>Very unfinished Whack-A-Mole!</h2>
                 <Home />
             </div>
         );
