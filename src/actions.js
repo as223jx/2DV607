@@ -17,8 +17,8 @@ module.exports = {
 					
 					setTimeout(function(){
 						if(getState().table.active.indexOf(random) != -1){
-						dispatch({type:'REMOVE_ACTIVE', id:random});
-						dispatch({type:'MISS_MOLE'});
+							dispatch({type:'REMOVE_ACTIVE', id:random});
+							dispatch({type:'MISS_MOLE'});
 						}
 					},2000);
 					setTimeout(addRandom,2000);
@@ -40,6 +40,9 @@ module.exports = {
 			if(getState().table.started && getState().table.active.indexOf(id) != -1){
 				dispatch({type:'KILL_MOLE', id:id});
 				dispatch({type:'REMOVE_ACTIVE', id:id});
+			}
+			else{
+				dispatch({type:'MISS_MOLE'});
 			}
 		}
 	}
