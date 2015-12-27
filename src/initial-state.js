@@ -3,7 +3,8 @@ module.exports = function(){
 		table: {
 			started: false,
 			active: {},
-			score: 0
+			score: 0,
+			delay: 2000
 		}
 	}
 };

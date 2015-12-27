@@ -23,9 +23,9 @@ var ActiveReducer = function(state, action){
 			}
 			return newState;
 		case 'KILL_MOLE':
-		console.log(action.id);
 			if(newState.started && newState.active[action.id]){
 				newState.score ++;
+				newState.delay = newState.delay - 50;
 			}
 			return newState;
 		case 'MISS_MOLE':

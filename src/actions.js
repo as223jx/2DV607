@@ -25,7 +25,7 @@ module.exports = {
 						var random = Math.floor((Math.random() * 15) +1);
 						dispatch({type:'ADD_ACTIVE', id:random});
 
-						setTimeout(addRandom,2000);
+						setTimeout(addRandom,getState().table.delay);
 					}
 				});
 				dispatch({type:'START_GAME'});
