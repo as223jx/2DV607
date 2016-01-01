@@ -19,7 +19,10 @@ var ActiveReducer = function(state, action){
 			return newState;
 		case 'STOP_GAME':
 			if(newState.started){
+				newState.active = {};
 				newState.started = false;
+				newState.hp = 3;
+				newState.score = 0;
 			}
 			return newState;
 		case 'KILL_MOLE':
@@ -29,8 +32,8 @@ var ActiveReducer = function(state, action){
 			}
 			return newState;
 		case 'MISS_MOLE':
-			if(newState.started && newState.score > 0){
-				newState.score--;
+			if(newState.started){
+				newState.hp--;
 			}
 			return newState;
 		default:

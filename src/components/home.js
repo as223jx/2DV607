@@ -11,7 +11,7 @@ const green = "green";
 var Home = React.createClass({
 	
 	propTypes: {
-		tbl: proptypes.shape({active: proptypes.object.isRequired, score: proptypes.number.isRequired, started: proptypes.bool.isRequired}).isRequired,
+		tbl: proptypes.shape({active: proptypes.object.isRequired, score: proptypes.number.isRequired, started: proptypes.bool.isRequired, hp: proptypes.number.isRequired}).isRequired,
 		addActive: proptypes.func.isRequired,
 		startGame: proptypes.func.isRequired,
 		clickSquare: proptypes.func.isRequired
@@ -21,13 +21,13 @@ var Home = React.createClass({
 		var tableprops = this.props.tbl;
 		var button = <button onClick={this.props.startGame}>Start</button>;
 		if(tableprops.started){
-			button = <button onClick={this.props.stopGame}>Stop</button>;
+			button = <button disabled>Start</button>;
 		}
         return (
             <div id='tableDiv'>
 			{button}
 				<Table onClick={this.props.clickSquare} activeCells={tableprops.active} />
-				<Score score={tableprops.score} />
+				<Score score={tableprops.score} hp={tableprops.hp}/>
             </div>
         );
     }

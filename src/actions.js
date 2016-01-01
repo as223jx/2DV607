@@ -18,14 +18,20 @@ module.exports = {
 						for(var prop in obj) {
 							if(obj.hasOwnProperty(prop))
 							dispatch({type:'MISS_MOLE'});
+
 						}
+						
+						if(getState().table.hp <= 0){
+							dispatch({type:'STOP_GAME'});
+						}
+						else{
+							getState().table.active = {};
 
-						getState().table.active = {};
+							var random = Math.floor((Math.random() * 15) +1);
+							dispatch({type:'ADD_ACTIVE', id:random});
 
-						var random = Math.floor((Math.random() * 15) +1);
-						dispatch({type:'ADD_ACTIVE', id:random});
-
-						setTimeout(addRandom,getState().table.delay);
+							setTimeout(addRandom,getState().table.delay);
+						}
 					}
 				});
 				dispatch({type:'START_GAME'});
@@ -45,6 +51,9 @@ module.exports = {
 			}
 			else{
 				dispatch({type:'MISS_MOLE'});
+				if(getState().table.hp <= 0){
+					dispatch({type:'STOP_GAME'});
+				}
 			}
 		}
 	}
