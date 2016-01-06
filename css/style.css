@@ -12,19 +12,20 @@
 }
 
 .black {
-	background-color: black;
+	background-color: white;
 }
 
 .green {
-	background-color: green;
+	background-image: url(../img/mole.png);
 }
 
 table {
 	margin-top: 10px;
+	border-collapse: collapse;
 }
 
 td {
 	width: 50px;
 	height: 50px;
-	border: 1px solid black;
+	border: 1px solid #CCC;
 }
