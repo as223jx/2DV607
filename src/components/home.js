@@ -26,7 +26,7 @@ var Home = React.createClass({
         return (
             <div id='tableDiv'>
 			{button}
-				<Table onClick={this.props.clickSquare} activeCells={tableprops.active} />
+				<Table onClick={this.props.clickSquare} activeCells={tableprops.active} corpses={this.props.corpses} />
 				<Score score={tableprops.score} hp={tableprops.hp}/>
             </div>
         );
@@ -34,7 +34,10 @@ var Home = React.createClass({
 });
 
 var mapStateToProps = function(state){
-    return {tbl:state.table};
+    return {
+    	tbl: state.table,
+    	corpses: state.corpses
+    };
 };
 
 var mapDispatchToProps = function(dispatch){

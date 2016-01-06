@@ -27,7 +27,7 @@ module.exports = {
 						else{
 							getState().table.active = {};
 
-							var random = Math.floor((Math.random() * 15) +1);
+							var random = Math.floor((Math.random() * 16));
 							dispatch({type:'ADD_ACTIVE', id:random});
 
 							setTimeout(addRandom,getState().table.delay);
@@ -46,7 +46,7 @@ module.exports = {
 	clickSquare: function(id){
 		return function(dispatch, getState){
 			if(getState().table.started && getState().table.active[id]){
-				dispatch({type:'KILL_MOLE', id:id});
+				dispatch({type:'KILL_MOLE', id:id, blood:1+Math.floor((Math.random() * 4)), rotation:Math.floor((Math.random() * 360))});
 				dispatch({type:'REMOVE_ACTIVE', id:id});
 			}
 			else{
