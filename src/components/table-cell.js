@@ -4,6 +4,19 @@ var React = require('react'),
     actions = require('../actions');
 
 	
-var TableCell = (props)=> { return <td onClick={props.onClick} className={props.isActive} id={props.id}></td>; };
+var TableCell = (props)=> {
+	var splatter = props.corpses.map((corpse,n)=>(
+		<div key={n} className="blood" style={{
+			backgroundImage: "url(img/blood"+corpse.blood+".png)",
+			transform: "rotate("+corpse.rotation+"deg)"
+		}}/>
+	));
+	return (
+		<td onClick={props.onClick} id={props.id}>
+			{props.hasMole ? <div className="mole"/> : null}
+			{splatter}
+		</td>
+	)
+};
 
 module.exports = TableCell;

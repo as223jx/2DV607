@@ -6,6 +6,7 @@ module.exports = function(){
 			score: 0,
 			delay: 2000,
 			hp: 3
-		}
+		},
+		corpses: {}
 	}
 };
