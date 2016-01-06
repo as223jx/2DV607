@@ -15,6 +15,7 @@ var ActiveReducer = function(state, action){
 		case 'START_GAME':
 			if(!newState.started){
 				newState.started = true;
+				newState.delay = 2000;
 			}
 			return newState;
 		case 'STOP_GAME':
