@@ -27,11 +27,11 @@ var Table = React.createClass({
 				}
 				click = this.props.onClick.bind(this, id);
 
-				cells.push(<TableCell key={j} id={id} hasMole={hasmole} onClick={click} corpses={this.props.corpses[id]||[]} />);
+				cells.push(<TableCell id={id} hasMole={hasmole} onClick={click} corpses={this.props.corpses[id]||[]} />);
 				id++;
 			}
 
-			rows.push(<tr key={i}>{cells}</tr>);
+			rows.push(<tr>{cells}</tr>);
 			cells=[];
 		}
 

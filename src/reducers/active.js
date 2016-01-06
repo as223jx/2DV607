@@ -21,7 +21,6 @@ var ActiveReducer = function(state, action){
 			if(newState.started){
 				newState.active = {};
 				newState.started = false;
-				newState.delay = 2000;
 				newState.hp = 3;
 				newState.score = 0;
 			}
