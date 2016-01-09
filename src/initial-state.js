@@ -5,7 +5,8 @@ module.exports = function(){
 			active: {},
 			score: 0,
 			delay: 2000,
-			hp: 3
+			hp: 3,
+			gameOver:false
 		},
 		corpses: {}
 	}

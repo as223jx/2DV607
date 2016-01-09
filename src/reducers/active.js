@@ -15,21 +15,28 @@ var ActiveReducer = function(state, action){
 		case 'START_GAME':
 			if(!newState.started){
 				newState.started = true;
+				newState.gameOver = false;
 				newState.delay = 2000;
+				newState.hp = 3;
+				newState.score = 0;
 			}
 			return newState;
 		case 'STOP_GAME':
 			if(newState.started){
 				newState.active = {};
 				newState.started = false;
-				newState.hp = 3;
-				newState.score = 0;
+				newState.gameOver = true;			
 			}
 			return newState;
 		case 'KILL_MOLE':
 			if(newState.started && newState.active[action.id]){
 				newState.score ++;
-				newState.delay = newState.delay - 50;
+				var percentage = 0.97;  // this will result in a percentage reduce of 3% every time there's a miss
+				if(newState.delay < 400) { // never go faster than 0.4 sek
+					newState.delay = 400;
+					percentage = 1; 
+				}
+				newState.delay = newState.delay * percentage;
 			}
 			return newState;
 		case 'MISS_MOLE':

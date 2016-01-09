@@ -10,7 +10,9 @@ module.exports = {
 
 	startGame: function(){
 		return function(dispatch, getState){
-
+				//clear the bloodsplatters
+				getState().corpses = {};
+				
 				var addRandom = (function(){
 					if(getState().table.started){
 						//If a mole is active when time runs out, it's a miss

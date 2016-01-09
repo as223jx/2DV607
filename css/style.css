@@ -1,3 +1,8 @@
+body {
+	min-height: 900px;
+	cursor:url(../img/hammer.png) 11 52, default;
+}
+
 #app {
 	text-align: center;
 	position: fixed;
@@ -41,4 +46,33 @@ td {
 	height: 50px;
 	border: 1px solid #CCC;
 	position: relative;
+}
+
+.wrapper {
+	position: relative;
+}
+
+.playBtn {
+	margin:15px 0;
+	cursor:url(../img/hammer.png) 11 52, default;
+}
+.playBtn:hover {
+	color: #b80713;
+}
+
+.gameOver {
+	background-image: url(../img/game-over.png);
+	background-size:100%;
+	width:100%;
+	padding-top:38%;
+	z-index:999;
+	position:absolute;
+	margin-top:27%;
+	background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 545px) {
+    .gameOver {
+       margin-top:38%;
+    }
 }
