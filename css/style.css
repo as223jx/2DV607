@@ -2,7 +2,9 @@ body {
 	min-height: 900px;
 	cursor:url(../img/hammer.png) 11 52, default;
 }
-
+body:active{
+	cursor:url(../img/hammer2.png) 11 52, default;
+}
 #app {
 	text-align: center;
 	position: fixed;
