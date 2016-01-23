@@ -1,4 +1,4 @@
-# Webix
+# Simple UI using Webix
 ## Introduction
 Webix is an easy to learn JavaScript and HTML5 framework aiming to provide a simple way of developing web applications with a highly responsive user interface. The framework is aimed at both beginner and advanced JS developers, so being a beginner myself, I thought this framework would be interesting to look into. 
 According to their official website, it is well-documented and fast to use even with large datasets and provides a desktop-like experience on the web. It also integrates with Backbone.js, Angular.js and jQuery.
